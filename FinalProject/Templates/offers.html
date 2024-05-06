@@ -1,0 +1,142 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+
+        @media (min-width:1024px) and (max-width:1366px) {
+            footer {
+                margin-top: 600px !important;
+            }
+        }
+
+        @media (min-width:820px) and (max-width:1180px) {
+            footer {
+                margin-top: 443px !important;
+            }
+        }
+
+    @media (min-width:768px) and (max-width:1024px) {
+        #cpnCode {
+            border: 1px dashed #fff;
+            padding: 2px 20px;
+            border-right: 0;
+            white-space: nowrap;
+            margin-left: -55px;
+        }
+    }
+    @media (max-width: 768px) {
+        .coupon-card {
+            margin-top: 15px;
+            height: auto;
+            width: auto;
+        }
+
+        .coupon-card {
+            width: auto;
+        }
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .coupon-card {
+        background: #121212;
+        color: #AFEeee;
+        text-align: center;
+        padding: 40px 80px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9) !important;
+        position: relative;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 80px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+
+    }
+
+    .coupon-card h3 {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 40px;
+
+    }
+
+    .coupon-card p {
+        font-size: 15px;
+    }
+
+    .coupon-row {
+        display: flex;
+        align-items: center;
+        margin: 25px auto;
+        width: fit-content;
+
+    }
+
+    #cpnCode {
+        border: 1px dashed #fff;
+        padding: 10px 20px;
+        border-right: 0;
+        white-space: nowrap;
+    }
+
+    #cpnBtn {
+        border: 1px solid #fff;
+        background: #fff;
+        padding: 10px 20px;
+        color: #7158fe;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .circle1 {
+        left: -25px;
+    }
+
+    .circle2 {
+        right: -25px;
+    }
+
+    h1 {
+        margin: 20px 0;
+        color: #AFEeee;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Offers</h1>
+        {% for offer in offerList %}
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="coupon-card">
+                <img src="/media/uploads/images/tourism_2560196.png" class="logo">
+                <h3>{{ offer.discountPercentage }}% flat off on all {{offer.validFor}}
+                    within the city<br></h3>
+                <div class="coupon-row">
+                    <span id="cpnCode">{{ offer.couponCode }}</span>
+                    <span id="cpnBtn">Copy Code</span>
+                </div>
+                <p>Valid Till: 20Sept, 2024</p>
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

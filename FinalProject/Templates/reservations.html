@@ -1,0 +1,209 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    header {
+        background-color: #121212 !important;
+        color: #AFEeee !important;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .reservation-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #fff;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.9) !important;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #121212;
+        color: #AFEeee;
+    }
+
+    .cancel-btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .cancel-btn:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<div class="reservation-container" style="background-color: #121212; color: #AFEeee;">
+    <h2>Hotel & Resort Reservations</h2>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Hotel/Resort Name</th>
+                    <th>Room Type</th>
+                    <th>Location</th>
+                    <th>Amount</th>
+                    <th>Date Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hotelresort_Reservations in hotelresort_Reservations %}
+                <tr>
+                    <td>{{ hotelresort_Reservations.reservation_id }}</td>
+                    <td>{{ hotelresort_Reservations.reservation_type }}</td>
+                    <td>{{ hotelresort_Reservations.reservation_room }}</td>
+                    <td>{{ hotelresort_Reservations.reservation_location }}</td>
+                    <td>{{ hotelresort_Reservations.reservation_amount }}</td>
+                    <td>{{ hotelresort_Reservations.reservation_dateTime }}</td>
+                    <td>
+                        <form action="{% url 'home:deleteReservations' hotelresort_Reservations.reservation_id %}"
+                            method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-btn">Cancel
+                                Reservation</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="reservation-container mt-5" style="background-color: #121212; color: #AFEeee;">
+    <h2>One Way Flight Reservations</h2>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Flight ID</th>
+                    <th>Origin Code</th>
+                    <th>Destination Code</th>
+                    <th>Airline</th>
+                    <th>Class</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for onewayflight_Reservations in onewayflight_Reservations %}
+                <tr>
+                    <td>{{ onewayflight_Reservations.reservation_id }}</td>
+                    <td>{{ onewayflight_Reservations.flight_id }}</td>
+                    <td>{{ onewayflight_Reservations.origin_code }}</td>
+                    <td>{{ onewayflight_Reservations.destination_code }}</td>
+                    <td>{{ onewayflight_Reservations.airline }}</td>
+                    <td>{{ onewayflight_Reservations.flight_class}}</td>
+                    <td>{{ onewayflight_Reservations.price }}</td>
+                    <td>
+                        <form
+                            action="{% url 'home:delete_oneway_Reservations' onewayflight_Reservations.reservation_id  %}"
+                            method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-btn">Cancel
+                                Reservation</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="reservation-container mt-5" style="background-color: #121212; color: #AFEeee;">
+    <h2>Round Trip Flight Reservations</h2>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>Departure Date</th>
+                    <th>Return Date</th>
+                    <th>Orgin Code</th>
+                    <th>Destination Code</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for roundtripflight_Reservations in roundtripflight_Reservations%}
+                <tr>
+                    <td>{{ roundtripflight_Reservations.reservation_id }}</td>
+                    <td>{{ roundtripflight_Reservations.departure_date }}</td>
+                    <td>{{ roundtripflight_Reservations.return_date }}</td>
+                    <td>{{ roundtripflight_Reservations.origin_code }}</td>
+                    <td>{{ roundtripflight_Reservations.destination_code }}</td>
+                    <td>{{ roundtripflight_Reservations.total_amount }}</td>
+                    <td>
+                        <form
+                            action="{% url 'home:delete_roundtrip_Reservations' roundtripflight_Reservations.reservation_id %}"
+                            method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-btn">Cancel
+                                Reservation</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<script>
+    const deleteBtns = document.querySelectorAll('.cancel-btn');
+
+    deleteBtns.forEach((deleteBtn) => {
+        deleteBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your reservation has been deleted.",
+                        icon: "success"
+                    }).then(() => {
+                        setTimeout(() => {
+                            deleteBtn.closest('form').submit();
+                        }, 500);
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

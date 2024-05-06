@@ -1,0 +1,1933 @@
+{% extends "base2.html" %}
+{% block content %}
+
+<style>
+  @media (min-width:1024px) and (max-width:1366px) {
+    .airline-image {
+      display: none !important;
+    }
+
+    .btn-primary {
+      margin-left: -69% !important;
+    }
+
+    .submitBtn {
+      margin-left: 0% !important;
+    }
+  }
+
+  @media (min-width:820px) and (max-width:1180px) {
+    .airline-image {
+      display: none !important;
+    }
+
+    .btn-primary {
+      margin-left: -15% !important;
+    }
+
+    .submitBtn {
+      margin-left: 0% !important;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 576px) {
+
+    .btn-primary {
+      background-color: #2020db;
+      border: 2px solid #1f1fff;
+      transition: .4s;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 100px;
+    }
+
+    .small-label {
+      white-space: nowrap !important;
+    }
+
+    .trip-places>div {
+      word-break: break-all;
+    }
+
+    .trip-places {
+      flex: 1;
+      overflow: hidden;
+      min-width: 3% !important;
+      overflow-wrap: break-word !important;
+    }
+
+    .query-Details-div {
+      background-color: #121212;
+      box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+      margin-top: 10px;
+      height: auto !important;
+      width: auto !important;
+      overflow-wrap: break-word !important;
+    }
+
+
+    .each-flight-div {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0px !important;
+      width: auto !important;
+    }
+
+    .each-flight-div-box {
+      width: auto !important;
+
+    }
+
+    .flight-time {
+      margin-right: 10px;
+      overflow-wrap: break-word !important;
+    }
+
+    svg {
+      display: none;
+    }
+
+    .bi-exclamation-circle {
+      display: inline-block;
+    }
+
+    .flight-origin-time {
+      margin-right: 40px;
+      white-space: nowrap;
+    }
+
+    .flight-destination-time {
+      margin-right: 20px;
+    }
+
+    .flight-place {
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+
+    .icon {
+      margin-left: -151px;
+    }
+
+    .trip-time {
+      padding: 0% !important;
+      white-space: nowrap;
+    }
+
+    .trip-class {
+      padding: 0% !important;
+    }
+
+    .duration {
+      position: absolute !important;
+      top: -23px !important;
+      bottom: 30px !important;
+      transform: translateX(-88%) !important;
+      white-space: nowrap !important;
+    }
+
+    .image {
+      display: none;
+    }
+
+    .query-result-div {
+      display: block;
+    }
+
+    .query-result-div>.container>.row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .query-data-div2 {
+      display: block;
+    }
+
+    .actual-result-div {
+      padding: 10px 0px !important;
+    }
+
+    .sort-div {
+      display: none !important;
+    }
+
+    .each-flight-div {
+      padding: 12px 10px;
+    }
+
+    .each-flight-div div {
+      overflow-wrap: break-word;
+    }
+
+    .flight-icon {
+      display: none;
+    }
+
+    .flight-time-div {
+      max-width: 44%;
+    }
+
+    .flight-time h5 {
+      font-size: 1em;
+    }
+
+    .flight-stops {
+      width: 17%;
+    }
+
+    .flight-company {
+      width: 23%;
+    }
+
+    .o-b {
+      display: none;
+    }
+
+    .flight-price>h5 {
+      margin-top: 50%;
+      margin-bottom: 53%;
+      font-weight: 600;
+      margin-left: -38% !important;
+      color: #AFEeee;
+    }
+
+    .flight-details {
+      display: none;
+    }
+
+    .white {
+      font-size: small;
+    }
+
+    .filter-div {
+      position: fixed;
+      height: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: white;
+      z-index: 999999;
+      box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: none;
+    }
+
+    .filter-div h4 {
+      font-size: 1.4em;
+    }
+
+    .close-filter {
+      display: block;
+    }
+
+    .f1 {
+      background-color: rgb(227, 242, 253);
+    }
+
+    .selection1,
+    .selection2,
+    .selection-total,
+    .selection-confirm {
+      display: none !important;
+    }
+
+    .selection-media {
+      display: flex !important;
+    }
+
+    .btn-primary {
+      margin-left: -55%;
+      font-size: 5px !important;
+      margin-top: 22px !important;
+      width: auto !important;
+    }
+
+    .fa-plane {
+      display: none;
+    }
+
+    footer {
+      position: static !important;
+      bottom: auto !important;
+    }
+
+    .v-line {
+      display: none !important;
+    }
+
+    .submitBtn {
+      background-color: #2020db;
+      border: 2px solid #1f1fff;
+      transition: .4s;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 50% !important;
+      font-size: 0.7em !important;
+      margin-left: -10px !important;
+    }
+
+    .submitBtn:hover {
+      background-color: #1717c2;
+      border: 2px solid #1717c2;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  h2 {
+    color: #AFEeee;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .section1 {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .white {
+    color: #AFEeee;
+    font-size: large;
+  }
+
+  .white-2 {
+    font-size: medium;
+  }
+
+  .v-line {
+    border-left: 1px dashed rgba(255, 255, 255, .9);
+    height: 100%;
+    margin: 0px 15px;
+  }
+
+  .small-label {
+    font-size: .7em;
+    color: #AFEeee;
+  }
+
+  .query-Details-div {
+    background-color: #121212;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+    margin-top: 10px;
+  }
+
+  .query-Details-div>.container {
+    display: flex;
+    height: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 8px;
+  }
+
+  .query-Details-div>.container>div {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+  }
+
+  .trip-places>div {
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #AFEeee;
+  }
+
+  .trip-time>div {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .trip-places {
+    flex: 1;
+    overflow: hidden;
+    min-width: 33%;
+  }
+
+  .trip-time,
+  .trip-class {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .trip-modify {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .spl-btn {
+    transition-duration: .2s;
+    color: white;
+    border-color: white;
+  }
+
+  .spl-btn2 {
+    color: white;
+    padding: 0;
+  }
+
+  .spl-btn2:hover {
+    color: white !important;
+    background-color: transparent !important;
+  }
+
+  .spl-btn2:active {
+    background-color: transparent !important;
+    color: white !important;
+  }
+
+  .spl-btn2:focus {
+    box-shadow: none !important;
+  }
+
+  /*.trip-modify button:hover, button:active, button:focus{
+    background-color: rgba(220,53,69,.1);
+}*/
+  .trip-modify button:hover,
+  button:active {
+    background-color: rgb(255, 235, 245);
+    color: rgb(189, 4, 116);
+  }
+
+  .trip-modify button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, .3);
+  }
+
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .query-result-div,
+  .query-result-div-2 {
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+    animation-name: appear;
+    animation-duration: .4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  .filter-div {
+    padding: 15px;
+  }
+
+  .actual-result-div {
+    flex: 1;
+    padding: 20px 35px;
+  }
+
+  .filter-box>div {
+    margin: 10px 0px 30px 0px;
+  }
+
+  .filter-div h4 {
+    font-weight: 800;
+    line-height: .75em;
+    font-size: 1.1em;
+    color: #321d1d;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .filter-box .font-weight-bold {
+    margin-bottom: 5px;
+  }
+
+  .square-box {
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: .6em;
+    width: 23%;
+    transition-duration: .2s;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .square-box:hover {
+    cursor: pointer;
+  }
+
+  .square-box.active {
+    background-color: #0075ff;
+    border-color: #0075ff;
+    color: white;
+  }
+
+  .square-box img {
+    width: 34px;
+  }
+
+  .filter-img-div {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-link {
+    background: none;
+    border: none;
+    outline: none;
+    color: blue;
+  }
+
+  .btn-link:hover,
+  .btn-link:focus,
+  .btn-link:active {
+    text-decoration: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .each-flight-div-box {
+    border-radius: 5px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+    margin-top: 10px;
+  }
+
+  .card {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+  .each-flight-div>div {
+    display: flex;
+  }
+
+  .company-details {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .company-name {
+    font-weight: bold;
+    color: #AFEeee;
+  }
+
+  .plane-name {
+    font-size: .8em;
+    color: #AFEeee;
+  }
+
+  .flight-company {
+    width: 25%;
+  }
+
+  .flight-time {
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+  }
+
+  .flight-details {
+    width: 32%;
+    justify-content: space-between;
+  }
+
+  .flight-origin-time,
+  .flight-destination-time {
+    width: 40%;
+  }
+
+  .flight-stops {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .flight-time h5 {
+    margin-bottom: 2px;
+  }
+
+  .flight-place {
+    font-size: .8em;
+    color: grey;
+    text-align: center;
+  }
+
+  .each-flight-div>div {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .flight-price {
+    display: flex;
+    margin-right: 15px;
+  }
+
+  .flight-price>h5 {
+    margin-top: 20%;
+    margin-bottom: 20%;
+    font-weight: 600;
+    color: #AFEeee;
+  }
+
+  .flight-stops {
+    position: relative;
+    opacity: 1;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 4px 7px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .9em;
+  }
+
+  .tooltip .tooltiptext:before {
+    content: '';
+    display: block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, .8);
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
+  /*.flight-stops-seperator{
+    border-top: 2px solid #979797;
+    width: 50px;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.flight-stops-disc{
+    width: 6px;
+    height: 6px;
+    border: 1px solid #000;
+    display: inline-block;
+    background-color: #fff;
+    position: relative;
+    z-index: 2;
+}*/
+  .flight-details-btn {
+    display: flex;
+    flex: 1;
+  }
+
+  .flight-details-btn button {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .sort-div {
+    display: flex;
+    justify-content: space-between;
+    /*margin-left: 20px;
+    margin-right: 150px;*/
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: .9em;
+  }
+
+  .sort-arrive,
+  .sort-depart {
+    /*margin-left: 34px;
+    margin-right: 4px;*/
+    text-align: center;
+  }
+
+  .sort-price {
+    margin-right: 20px;
+  }
+
+  .price-range-output {
+    margin-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    color: #808080;
+    font-size: .8em;
+  }
+
+
+  .show {
+    display: block;
+  }
+
+  .hide {
+    display: none;
+  }
+
+
+  .selection-div {
+    position: fixed;
+    z-index: 99;
+    background-image: linear-gradient(135deg, rgba(220, 20, 60, .85), rgba(184, 1, 123, .85));
+    height: 10%;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+    display: flex;
+    color: white;
+    justify-content: space-evenly;
+  }
+
+  .selection-div>div {
+    text-align: center;
+    display: flex;
+  }
+
+  .selection-div>div>div {
+    margin: auto;
+  }
+
+  .flight1-radio,
+  .flight2-radio {
+    transform: scale(1.5);
+  }
+
+  .flight-details-btn input[type="radio"] {
+    margin: auto;
+  }
+
+
+  .query-trip-type-div {
+    display: flex;
+    padding: 10px 0;
+  }
+
+  .query-trip-type-div>div {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #flight1-btn-div {
+    padding: 5px 10px;
+    border-radius: 15px 0 0 15px;
+    cursor: pointer;
+    border: .5px dotted rgb(220, 45, 60);
+    transition-duration: .4s;
+  }
+
+  #flight2-btn-div {
+    padding: 5px 10px;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    border: .5px dotted rgb(220, 45, 60);
+    transition-duration: .4s;
+  }
+
+  .tabs {
+    margin-top: 50px;
+    font-size: 15px;
+    padding: 0px;
+    list-style: none;
+    background: #fff;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    border-radius: 50px;
+    position: relative;
+  }
+
+  .tabs a {
+    text-decoration: none;
+    color: #777;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    display: inline-block;
+    position: relative;
+    transition-duration: 0.6s;
+  }
+
+  .tabs a.active-div {
+    color: #fff;
+  }
+
+
+  .tabs a i {
+    margin-right: 5px;
+  }
+
+  .tabs .selector {
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 50px;
+    transition-duration: 0.6s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    background: #b80190;
+    background: linear-gradient(45deg, crimson 0%, #b80190 100%);
+    /*background: #05abe0;*/
+    /*background: linear-gradient(45deg, #05abe0 0%,#8200f4 100%);*/
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#05abe0', endColorstr='#8200f4', GradientType=1);
+  }
+
+
+  .bb2 {
+    display: none;
+    padding: .2rem .52rem;
+    border-radius: 50%;
+  }
+
+  .blue {
+    background-color: rgb(227, 242, 253);
+  }
+
+  .b1 {
+    padding: 0;
+  }
+
+  .selection-media {
+    display: none !important;
+    width: 100%;
+  }
+
+  .selection-media>div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .duration {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #AFEeee;
+  }
+
+  .icon {
+    position: absolute;
+    top: 1px;
+    width: 30px;
+    margin-right: -100px;
+    margin-left: 18px;
+    margin-top: 9px;
+    background: transparent;
+  }
+
+  @media (min-width:100px) and (max-width:1090px) {
+    .airline-image {
+      display: none !important;
+    }
+
+    .btn-primary {
+      white-space: nowrap;
+    }
+  }
+
+
+  @media (max-width: 576px) {
+
+    .customArrow {
+      display: inline-block;
+    }
+
+    .each-flight-div {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0px !important;
+    }
+
+    .flight-time {
+      margin-right: 10px;
+    }
+
+    svg {
+      display: none;
+    }
+
+    .flight-origin-time {
+      margin-right: 40px;
+      white-space: nowrap;
+    }
+
+    .flight-destination-time {
+      margin-right: 20px;
+    }
+
+    .flight-place {
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+
+    .icon {
+      margin-left: -151px;
+    }
+
+    .trip-time {
+      padding: 0% !important;
+      white-space: nowrap;
+    }
+
+    .trip-class {
+      padding: 0% !important;
+    }
+
+    .duration {
+      position: absolute !important;
+      top: -23px !important;
+      bottom: 30px !important;
+      transform: translateX(-88%) !important;
+      white-space: nowrap !important;
+    }
+
+    .image {
+      display: none;
+    }
+
+    .query-result-div {
+      display: block;
+    }
+
+    .query-result-div>.container>.row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .query-data-div2 {
+      display: block;
+    }
+
+    .actual-result-div {
+      padding: 10px 0px !important;
+    }
+
+    .sort-div {
+      display: none !important;
+    }
+
+    .each-flight-div {
+      padding: 12px 10px;
+    }
+
+    .each-flight-div div {
+      overflow-wrap: break-word;
+    }
+
+    .flight-icon {
+      display: none;
+    }
+
+    .flight-time-div {
+      max-width: 44%;
+    }
+
+    .flight-time h5 {
+      font-size: 1em;
+    }
+
+    .flight-stops {
+      width: 17%;
+    }
+
+    .flight-company {
+      width: 23%;
+    }
+
+    .o-b {
+      display: none;
+    }
+
+    .flight-price>h5 {
+      margin-top: 50%;
+      margin-bottom: 53%;
+      font-weight: 600;
+      margin-left: -50%;
+      color: #AFEeee;
+    }
+
+    .flight-details {
+      display: none;
+    }
+
+    .white {
+      font-size: small;
+    }
+
+    .filter-div {
+      position: fixed;
+      height: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: white;
+      z-index: 999999;
+      box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: none;
+    }
+
+    .filter-div h4 {
+      font-size: 1.4em;
+    }
+
+    .close-filter {
+      display: block;
+    }
+
+    .f1 {
+      background-color: rgb(227, 242, 253);
+    }
+
+    .selection1,
+    .selection2,
+    .selection-total,
+    .selection-confirm {
+      display: none !important;
+    }
+
+    .selection-media {
+      display: flex !important;
+    }
+
+    .btn-primary {
+      margin-left: -55%;
+      font-size: 9px !important;
+      margin-top: 22px !important;
+      width: auto !important;
+    }
+
+    .fa-plane {
+      display: none;
+    }
+
+    footer {
+      position: static !important;
+      bottom: auto !important;
+    }
+
+    .trip-places>div {
+      padding-left: 0px;
+      padding-right: 8px;
+    }
+
+    .v-line {
+      display: none !important;
+    }
+
+    .submitBtn {
+      background-color: #2020db;
+      border: 2px solid #1f1fff;
+      transition: .4s;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 54% !important;
+      font-size: 0.9em !important;
+      margin-left: -10px !important;
+    }
+
+    .submitBtn:hover {
+      background-color: #1717c2;
+      border: 2px solid #1717c2;
+    }
+
+  }
+
+  .query-result-div,
+  .query-result-div-2 {
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+  }
+
+  .filter-div {
+    padding: 15px;
+  }
+
+  .actual-result-div {
+    flex: 1;
+    padding: 20px 35px;
+  }
+
+  .filter-box>div {
+    margin: 10px 0px 30px 0px;
+  }
+
+  .filter-div h4 {
+    font-weight: 800;
+    line-height: .75em;
+    font-size: 1.1em;
+    color: #321d1d;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .filter-box .font-weight-bold {
+    margin-bottom: 5px;
+  }
+
+  .square-box {
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: .6em;
+    width: 23%;
+    transition-duration: .2s;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .square-box:hover {
+    cursor: pointer;
+  }
+
+  .square-box.active {
+    background-color: #0075ff;
+    border-color: #0075ff;
+    color: white;
+  }
+
+  .square-box img {
+    width: 34px;
+  }
+
+  .filter-img-div {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-link {
+    background: none;
+    border: none;
+    outline: none;
+    color: blue;
+  }
+
+  .btn-link:hover,
+  .btn-link:focus,
+  .btn-link:active {
+    text-decoration: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+
+  .each-flight-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 20px;
+  }
+
+  .each-flight-div-box {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    margin-top: 10px;
+  }
+
+  .card {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+  .each-flight-div>div {
+    display: flex;
+  }
+
+  .company-details {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .company-name {
+    font-weight: bold;
+  }
+
+  .plane-name {
+    font-size: .8em;
+    color: #AFEeee;
+  }
+
+  .flight-company {
+    width: 25%;
+  }
+
+  .flight-time {
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+  }
+
+  .flight-details {
+    width: 32%;
+    justify-content: space-between;
+  }
+
+  .flight-origin-time,
+  .flight-destination-time,
+  .flight-origin-time2,
+  .flight-destination-time2 {
+    width: 40%;
+  }
+
+  .flight-stops,
+  .flight-stops2 {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    opacity: 1;
+  }
+
+  .flight-time h5 {
+    margin-bottom: 2px;
+    color: #AFEeee;
+  }
+
+  .flight-place {
+    font-size: .8em;
+    color: #AFEeee;
+    text-align: center;
+  }
+
+  .each-flight-div>div {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .flight-price2 {
+    display: flex;
+    margin-right: 15px;
+  }
+
+  .flight-price2>h5 {
+    margin-top: 20%;
+    margin-bottom: 20%;
+    font-weight: 600;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 4px 7px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .9em;
+  }
+
+  .tooltip .tooltiptext:before {
+    content: '';
+    display: block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, .8);
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .flight-details-btn {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+  }
+
+  .flight-details-btn button {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .sort-div {
+    display: flex;
+    justify-content: space-between;
+    /*margin-left: 20px;
+  margin-right: 150px;*/
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: .9em;
+  }
+
+  .sort-arrive,
+  .sort-depart {
+    /*margin-left: 34px;
+  margin-right: 4px;*/
+    text-align: center;
+  }
+
+  .sort-price {
+    margin-right: 20px;
+  }
+
+  .price-range-output {
+    margin-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    color: #808080;
+    font-size: .8em;
+  }
+
+  .query-Details-div2>.container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .query-Details-div2 .trip-modify {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .query-Details-div2 .trip-modify form {
+    display: flex;
+    justify-content: start;
+  }
+
+  .query-Details-div2 .trip-filter form {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .close-filter {
+    display: none;
+    margin-top: 10px;
+  }
+
+  .close-filter .b2 {
+    padding: 0;
+    width: 100%;
+    padding: .375rem .75rem;
+  }
+
+  .close-filter button:focus,
+  button:active {
+    box-shadow: none;
+  }
+
+  .duration {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .confirmation-form {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+    background-color: #121212;
+    color: #AFEeee;
+  }
+
+  .home{
+    width: 30%;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    color: #AFEeee;
+    font-size: 2em;
+  }
+
+  h3 {
+    margin-bottom: 15px;
+    color: #AFEeee;
+    font-size: 1.5em;
+  }
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #AFEeee
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #AFEeee;
+    background-color: #121212;
+    text-align: center;
+  }
+
+  .submitBtn {
+    background-color: #2020db;
+    border: 2px solid #1f1fff;
+    transition: .4s;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 1.2em;
+  }
+
+  .submitBtn:hover {
+    background-color: #1717c2;
+    border: 2px solid #1717c2;
+  }
+
+
+  .btn-primary {
+    background-color: #2020db;
+    border: 2px solid #1f1fff;
+    transition: .4s;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #1717c2;
+    border: 2px solid #1717c2;
+    color: white;
+  }
+</style>
+
+{% if outboundData %}
+{% for outboundData in outboundData %}
+<section>
+  {% if forloop.first %}
+  <div class="query-Details-div">
+    <div class="container">
+      <div class="trip-places">
+        <div class="from-div text-align-left">
+          <div class="small-label">From</div>
+          <div class="white">{{outboundData.departure_city}}</div>
+        </div>
+        <div class="trip-type-div white">
+          <div class="small-label">&nbsp;</div>
+
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z" />
+          </svg>
+        </div>
+        <div class="to-div text-align-right">
+          <div class="small-label">To</div>
+          <div class="white">{{outboundData.arrival_city}} </div>
+        </div>
+      </div>
+      <div class="v-line"></div>
+      <div class="trip-time">
+        <div class="depart-date-div">
+          <div class="small-label">Depart</div>
+          <div class="white">{{outboundData.departure_date|date:"D, d M Y"}}</div>
+        </div>
+        <div class="return-date-div">
+          <div class="small-label">Return</div>
+          <div class="white">
+            {% if outboundData.return_date %}
+            {{outboundData.return_date|date:"D, d M Y"}}
+            {% else %}
+            <span style="margin-left: 16px;">---</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="v-line"></div>
+      <div class="trip-class">
+        <div class="return-date-div">
+          <div class="small-label">Class</div>
+          <div class="white">{{outboundData.flight_class}}</div>
+        </div>
+      </div>
+      <div class="v-line"></div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  {% for outboundData in outboundData %}
+  {% if forloop.first %}
+  <h2 style="text-align: center; margin:10px 0; color:#AFEeee;">
+    {{outboundData.origin_code}}
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right customArrow" fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+    </svg>
+    {{outboundData.destination_code}}
+  </h2>
+  {% endif %}
+  {% endfor %}
+
+  {% for data,price in outboundprices %}
+<!-- outbound section -->
+  <div id="outbounddata">
+    <div class="each-flight-div-box show">
+      <div class="each-flight-div" id="each-flight-div" onclick="media_click(this)">
+        <div class="flight-company">
+          <div class="flight-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+              focusable="false" width="1.5em" height="1.3em"
+              style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+              preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384">
+              <path
+                d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z"
+                fill="#434445" />
+              <rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" />
+            </svg>
+          </div>
+          <div class="company-details">
+            <div class="company-name" id="inboundairline">{{data.airline_name}}</div>
+            <div class="plane-name">{{data.airplane_name}}</div>
+          </div>
+        </div>
+        <div class="flight-time flight-time-div">
+          <div class="flight-origin-time">
+            <div class="flight-time" id="inbounddepttime">
+              <h5>{{data.departure_time}}</h5>
+            </div>
+            <div class="flight-place" id="inbounddeptcity">
+              {{data.departure_city}}
+            </div>
+          </div>
+          <div class="flight-stops tooltip">
+            <span class="duration">{{data.flight_duration}}</span>
+            <svg class="svgline" width="200" height="50"
+              style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+              <line x1="10" y1="25" x2="140" y2="25" stroke="black" stroke-dasharray="5,5" />
+              <polygon points="140,25 130,22 130,28" fill="black" />
+              <path d="M160 25 L185 25 L175 20 Z" fill="black" />
+            </svg>
+            <img style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);"
+              class="icon" src="/media/uploads/images/—Pngtree—vector airplane icon_3989910.png" alt="Airplane Icon" />
+            <span class="tooltiptext" Details-value></span><!--07 hrs 50 mins-->
+          </div>
+
+          <div class="flight-destination-time">
+            <div class="flight-time" id="inboundarrtime">
+              <h5>{{data.arrival_time}}</h5>
+            </div>
+            <div class="flight-place" id="inboundarrivalcity">
+              {{data.arrival_city}}
+            </div>
+          </div>
+        </div>
+        <div class="flight-details">
+          <div class="flight-price" id="inboundprice">
+            <input type="text" class="flightid" value="{{data.flight_id}}" hidden>
+            <h5 style="font-size: 22px;">
+              {% if currencySelected == 'USD' %}
+              <span>
+                {{price}}
+              </span>
+              {% else %}
+              <span>
+                {{price}}
+              </span>  
+              {% endif %}
+            </h5>
+          </div>
+          <div class="flight-details">
+            <div class="airline-image">
+              <img src="/media/{{data.airline_image}}" alt="{{outboundData.airline_name}}"
+                style="width: 130px; height: 55px; margin-left:10%;">
+            </div>
+          </div>
+          <div class="flight-details-btn">
+            <button id="InboundBtn{{forloop.counter}}" class="btn btn-primary" onclick="handleOutboundClick(this)">
+              <i class="fas fa-plane"></i>
+              Select Outbound Flight
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+
+  <div id="inboundsection" class="sectioninbound">
+    {% for inboundData in inboundData %}
+    {% if forloop.first %}
+    <h2 style="text-align: center; margin:10px 0; color:#AFEeee;">
+      {{inboundData.origin_code}}
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right customArrow" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+      </svg>
+      {{inboundData.destination_code}}
+    </h2>
+    {% endif %}
+
+<!-- inbound section -->
+{% for data2,price2 in inboundprices %}
+<div class="each-flight-div-box show">
+  <div class="each-flight-div" onclick="media_click(this)">
+    <div class="flight-company">
+      <div class="flight-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+          focusable="false" width="1.5em" height="1.3em"
+          style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+          preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384">
+          <path
+            d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z"
+            fill="#434445" />
+          <rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" />
+        </svg>
+      </div>
+      <div class="company-details">
+        <div class="company-name" id="outboundairline">{{data2.airline_name}}</div>
+        <div class="plane-name">{{data2.airplane_name}}</div>
+      </div>
+    </div>
+    <div class="flight-time flight-time-div">
+      <div class="flight-origin-time">
+        <div class="flight-time" id="outbounddepttime">
+          <h5>{{data2.departure_time}}</h5>
+        </div>
+        <div class="flight-place" id="outbounddeptcity">
+          {{data2.departure_city}}
+        </div>
+      </div>
+      <div class="flight-stops tooltip">
+        <span class='duration'
+          style="position: absolute; top: 0; left: 50%; transform: translateX(-50%);">{{data2.flight_duration}}</span>
+        <svg class="svgline" width="200" height="50"
+          style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <line x1="10" y1="25" x2="140" y2="25" stroke="black" stroke-dasharray="5,5" />
+          <polygon points="140,25 130,22 130,28" fill="black" />
+          <path d="M160 25 L185 25 L175 20 Z" fill="black" />
+        </svg>
+        <img style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);"
+          class="icon" src="/media/uploads/images/—Pngtree—vector airplane icon_3989910.png" alt="Airplane Icon" />
+        <span class="tooltiptext" Details-value></span>
+      </div>
+
+      <div class="flight-destination-time">
+        <div class="flight-time" id="outboundarrtime">
+          <h5>{{data2.arrival_time}}</h5>
+        </div>
+        <div class="flight-place" id="outboundarrivalcity">
+          {{data2.arrival_city}}
+        </div>
+      </div>
+    </div>
+    <div class="flight-details">
+      <div class="flight-price" id="outboundprice">
+        <input type="text" class="flightid" value="{{data2.flight_id}}" hidden>
+        <h5 style="font-size: 22px;">
+          {% if currencySelected == 'USD' %}
+          <span>
+          {{price2}}
+          </span>
+          {% else %}
+          <span>
+          {{price2}}
+          </span>  
+          {% endif %}
+        </h5>
+      </div>
+      <div class="flight-details">
+        <div class="airline-image">
+          <img src="/media/{{data2.airline_image}}" alt="{{data2.airline_name}}"
+            style="width: 130px; height: 55px; margin-left:10%;">
+        </div>
+      </div>
+      <div class="flight-details-btn">
+        <button class="btn btn-primary" id="OutboundBtn{{forloop.counter}}" onclick="handleInboundClick(this)">
+          <i class="fas fa-plane"></i>
+          Select Inbound Flight
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+    {% endfor %}
+  </div>
+
+  {% for outboundData in outboundData %}
+  {% if forloop.first %}
+  <div class="container" id="formflight">
+    <div class="card confirmation-form">
+      <h2 class="card-header" style="text-align: center;text-transform:uppercase;">Flight
+        Confirmation</h2>
+      <form
+        action="{% url 'flightBooking:confirmDoubleflight' outboundData.airline_image.url outboundData.departure_date outboundData.return_date outboundData.flight_class passengers %}"
+        method="POST" id="form">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <h2 style="text-transform:uppercase;">Outbound Details</h2>
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="OutboundDepartureCity">Departure City</label>
+                  <input type="text" id="OutboundDepartureCity" name="OutboundDepartureCity" class="form-control"
+                    readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="OutboundArrivalCity">Arrival City:</label>
+                  <input type="text" id="OutboundArrivalCity" name="OutboundArrivalCity" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="OutboundDepartureTime">Departure Time:</label>
+                  <input type="text" id="OutboundDepartureTime" name="OutboundDepartureTime" class="form-control"
+                    readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="OutboundArrivalTime">Arrival Time:</label>
+                  <input type="text" id="OutboundArrivalTime" name="OutboundArrivalTime" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="OutboundAirline">Airline:</label>
+                  <input type="text" id="OutboundAirline" name="OutboundAirline" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="OutboundPrice">Price:</label>
+                  <input type="number" id="OutboundPrice" name="OutboundPrice" class="form-control" readonly>
+                </div>
+                <div class="col-md-6">
+                  <label for="OutboundFlightid">Flight ID:</label>
+                  <input type="text" id="OutboundFlightid" name="OutboundFlightid" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <h2 style="text-transform:uppercase;">Inbound Details</h2>
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="InboundDepartureCity">Departure City</label>
+                  <input type="text" id="InboundDepartureCity" name="InboundDepartureCity" class="form-control"
+                    readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="InboundArrivalCity">Arrival City:</label>
+                  <input type="text" id="InboundArrivalCity" name="InboundArrivalCity" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="InboundDepartureTime">Departure Time:</label>
+                  <input type="text" id="InboundDepartureTime" name="InboundDepartureTime" class="form-control"
+                    readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="InboundArrivalTime">Arrival Time:</label>
+                  <input type="text" id="InboundArrivalTime" name="InboundArrivalTime" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="InboundAirline">Airline:</label>
+                  <input type="text" id="InboundAirline" name="InboundAirline" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                  <label for="InboundPrice">Price:</label>
+                  <input type="number" id="InboundPrice" name="InboundPrice" class="form-control" readonly>
+                </div>
+                <div class="col-md-6">
+                  <label for="InboundFlightid">Flight ID:</label>
+                  <input type="text" id="InboundFlightid" name="InboundFlightid" class="form-control" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary submitBtn" name="submitBtn" id="submitBtn"
+            value="confirmFlightdetails">
+            <i class="fas fa-check-circle"></i>
+            Confirm Flight Details</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  {% else %}
+
+  <div style="height: 100%; width:100%; padding: 10%; color: black;">
+    <div style="text-align: center; margin: auto; box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7); padding:30px;">
+      <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="white"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path
+          d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+      </svg>
+      <br><br>
+      <h3 style="color: #AFEeee;">Sorry, No Flight for this Search</h3>
+      <p style="color: #AFEeee;">
+        We cannot find any flights for the cabin class of your search. Please
+        modify your search criteria and try again.
+      </p>
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary home"><a href="{% url 'home:home' %}"
+            style="text-decoration: none; color: white; width:40;">Home</a></button>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+
+</section>
+
+<script>
+  function handleOutboundClick(button) {
+    const parentDiv = button.closest('.each-flight-div');
+    document.getElementById('OutboundAirline').value = parentDiv.querySelector('.company-name').textContent;
+    document.getElementById('OutboundDepartureCity').value = parentDiv.querySelector('.flight-origin-time .flight-place').textContent;
+    document.getElementById('OutboundArrivalCity').value = parentDiv.querySelector('.flight-destination-time .flight-place').textContent;
+    document.getElementById('OutboundDepartureTime').value = parentDiv.querySelector('.flight-origin-time .flight-time h5').textContent;
+    document.getElementById('OutboundArrivalTime').value = parentDiv.querySelector('.flight-destination-time .flight-time h5').textContent;
+    document.getElementById('OutboundPrice').value = parseFloat(parentDiv.querySelector('.flight-price span').textContent);
+    document.getElementById('OutboundFlightid').value = parentDiv.querySelector('.flight-price .flightid').value;
+    document.getElementById('OutboundDuration').value = parentDiv.querySelector('.flight-price .flightid').value;
+
+  }
+
+
+  function handleInboundClick(button) {
+    const parentDiv = button.closest('.each-flight-div');
+    document.getElementById('InboundAirline').value = parentDiv.querySelector('.company-name').textContent;
+    document.getElementById('InboundDepartureCity').value = parentDiv.querySelector('.flight-origin-time .flight-place').textContent;
+    document.getElementById('InboundArrivalCity').value = parentDiv.querySelector('.flight-destination-time .flight-place').textContent;
+    document.getElementById('InboundDepartureTime').value = parentDiv.querySelector('.flight-origin-time .flight-time h5').textContent;
+    document.getElementById('InboundArrivalTime').value = parentDiv.querySelector('.flight-destination-time .flight-time h5').textContent;
+    document.getElementById('InboundPrice').value = parseFloat(parentDiv.querySelector('.flight-price span').textContent);
+    document.getElementById('InboundFlightid').value = parentDiv.querySelector('.flight-price .flightid').value;
+    scrollToForm()
+  }
+
+  document.getElementById('submitBtn').addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Please confirm the flight details before submission!",
+      icon: "warning",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Yes, confirm it!",
+      denyButtonText: `Cancel`
+    });
+
+    if (result.isConfirmed) {
+      Swal.fire("Details Submitted!", "", "success").then(() => {
+        setTimeout(() => {
+          document.getElementById('form').submit();
+        }, 300);
+      });
+    } else if (result.isDenied) {
+      Swal.fire("Details not submitted", "", "info");
+    }
+  });
+
+  function scrollToForm() {
+    console.log('hello2')
+    document.getElementById('formflight').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function changeName() {
+    const btns = document.querySelectorAll('.btn.btn-primary'); // corrected selector
+    if (window.innerWidth < 500) {
+      for (let x = 0; x < btns.length; x++) {
+        if (x < 2) {
+          btns[x].innerText = 'Select Flight';
+        } else {
+          break;
+        }
+      }
+    }
+  }
+
+  window.addEventListener('resize', () => {
+    changeName();
+  });
+
+</script>
+{% endblock %}

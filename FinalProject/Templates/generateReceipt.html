@@ -1,0 +1,311 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    @media (min-width:1024px) and (max-width:1366px) {
+        footer {
+            margin-top: 280px !important;
+        }
+    }
+
+    .card-footer-btn {
+        display: flex;
+        align-items: center;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+
+    .text-uppercase-bold-sm {
+        text-transform: uppercase !important;
+        font-weight: 500 !important;
+        letter-spacing: 2px !important;
+        font-size: .85rem !important;
+    }
+
+    .hover-lift-light {
+        transition: box-shadow .25s ease, transform .25s ease, color .25s ease, background-color .15s ease-in;
+    }
+
+    .justify-content-center {
+        justify-content: center !important;
+    }
+
+    .btn-group-lg>.btn,
+    .btn-lg {
+        padding: 0.8rem 1.85rem;
+        font-size: 1.1rem;
+        border-radius: 0.3rem;
+    }
+
+    .btn-dark {
+        color: #fff;
+        background-color: #1e2e50;
+        border-color: #1e2e50;
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #121212;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .p-5 {
+        padding: 3rem !important;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.5rem 1.5rem;
+        color:#AFEeee;
+    }
+
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+        border-color: inherit;
+        border-style: solid;
+        border-width: 0;
+        background-color: #121212 !important;
+    }
+
+    .table td,
+    .table th {
+        border-bottom: 0;
+        border-top: 1px solid #edf2f9;
+        color:#AFEeee;
+        background-color: #121212;
+    }
+
+    .table>:not(caption)>*>* {
+        padding: 1rem 1rem;
+        background-color: var(--bs-table-bg);
+        border-bottom-width: 1px;
+        box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+    }
+
+    .px-0 {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .table thead th,
+    tbody td,
+    tbody th {
+        vertical-align: middle;
+    }
+
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
+        border-color: inherit;
+        border-style: solid;
+        border-width: 0;
+        color:#AFEeee;
+        background-color: #121212;
+    }
+
+    .mt-5 {
+        margin-top: 3rem !important;
+    }
+
+    .icon-circle[class*=text-] [fill]:not([fill=none]),
+    .icon-circle[class*=text-] svg:not([fill=none]),
+    .svg-icon[class*=text-] [fill]:not([fill=none]),
+    .svg-icon[class*=text-] svg:not([fill=none]) {
+        fill: currentColor !important;
+    }
+
+    .svg-icon>svg {
+        width: 1.45rem;
+        height: 1.45rem;
+    }
+
+    .icon {
+        width: 24px;
+        height: 24px;
+        margin-left: 10px;
+    }
+
+    .payment-button {
+        height: 60px;
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        outline: none;
+        transition: .4s;
+        color: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex; /* Add display flex */
+        justify-content: center;
+        padding-top: 8px;
+        padding-bottom: 5px;
+    }
+
+    .payment-button:hover {
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+
+    .container {
+        max-width: 950px;
+    }
+
+    .card {
+        box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .text-muted {
+        color:#AFEeee !important;
+    }
+
+    .text-info {
+        color:#AFEeee !important;
+    }
+
+    .text-bold {
+        font-weight: bold;
+    }
+
+    .border-top-light {
+        border-top: 1px solid #edf2f9;
+    }
+
+    .py-3 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* Adjust spacing and font-size as needed */
+    .fs-md {
+        font-size: 1rem !important;
+    }
+
+    .fs-lg {
+        font-size: 1.25rem !important;
+    }
+</style>
+<form action="{% url 'hotelBooking:checkout_session' obj.reservation_id %}" method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-xl-8">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <h2 class="mb-4">
+                            Hey {{firstname}} {{lastname}},
+                        </h2>
+                        <p class="fs-md text-muted">
+                            This is the receipt for a payment of <strong
+                                class="text-info">AED{{reservationFinalamt}}</strong>
+                            you will be making to Trip Canvas for the booking of {{reservation_room}} room in {{reservation_type}} for {{reservationDuration}} nights.
+                        </p>
+
+                        <div class="border-top border-top-light py-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Reservation ID</div>
+                                    <strong class="text-bold">{{obj.reservation_id}}</strong>
+                                </div>
+                                <div class="col-md-6 text-md-end mb-2">
+                                    <div class="text-muted">Payment Date</div>
+                                    <strong class="text-bold">{{current_datetime}}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-top border-top-light py-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="text-muted">Client</div>
+                                    <strong class="text-bold">{{firstname}}{{lastname}}</strong>
+                                    <p class="fs-sm">
+                                        <a href="#!" class="text-info" style="text-decoration: none;">{{userEmail}}</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-6 text-md-end mb-2">
+                                    <div class="text-muted">Payment To</div>
+                                    <strong class="text-bold">TripCanvas</strong>
+                                    <p class="fs-sm">
+                                        <a href="#!" class="text-info"
+                                            style="text-decoration: none;">tripcanvas30@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table mt-1" style="background-color: #121212;">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="color: #AFEeee;" class="fs-md px-0">Description</th>
+                                    <th scope="col" style="color: #AFEeee;" class="fs-md text-end px-0">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-0">{{reservation_type}} | {{reservation_room}}</td>
+                                    {% if currencySelected == 'USD' %}
+                                    <td style="text-align:right; color:#AFEeee;">USD {{amount}}</td>
+                                    {% else %}
+                                    <td style="text-align:right; color:#AFEeee;">AED {{amount}}</td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-end mb-2">
+                                <p class="text-muted me-3 fs-md">Subtotal:</p>
+                                {% if currencySelected == 'USD' %}
+                                <span class="fs-md">USD {{amount}}</span>
+                                {% else %}
+                                <span class="fs-md">AED {{amount}}</span>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-end mb-2">
+                                <p class="text-muted me-3 fs-md">Discount:</p>
+                                {% if currencySelected == 'USD' %}
+                                <span class="fs-md">- {{discount}} USD</span>
+                                {% else %}
+                                <span class="fs-md">- {{discount}} AED</span>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex justify-content-end mt-3">
+                                <h5 class="me-3 fs-lg">Total:</h5>
+                                {% if currencySelected == 'USD' %}
+                                <h5 class="fs-lg">USD {{reservationFinalamt}}</h5>
+                                {% else %}
+                                <h5 class="fs-lg">AED {{reservationFinalamt}}</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="btn btn-dark btn-lg card-footer-btn justify-content-center text-uppercase-bold-sm hover-lift-light payment-button">
+                        Pay Now
+                        <span class="svg-icon text-white me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon">
+                                <path d="M16 17l4-4-4-4M4 12h16"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

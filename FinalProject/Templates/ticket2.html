@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" id="ticket">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @page {
+            margin: 37px 50px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            background-color: #121212;
+            color: #AFEeee;
+        }
+
+        body {
+            padding: 7% 7%;
+            background-color: #121212;
+            font-family: 'Tilt Neon', sans-serif;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            display: flex;
+        }
+
+        .header {
+            text-align: right;
+            font-size: 2em;
+            font-weight: 600;
+            color: red;
+        }
+
+        li {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .col {
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-width: 100%
+        }
+
+        table {
+            margin-top: 0;
+            width: 100%;
+        }
+
+        .table {
+            margin-top: 25px;
+        }
+
+        tr {
+            width: 100%;
+        }
+
+        th {
+            width: 25%;
+            text-align: left;
+            padding: 5px 20px;
+        }
+
+        td {
+            width: 25%;
+            text-align: left;
+            padding: 5px 15px;
+        }
+
+        h3 {
+            text-align: left;
+            background-color: #a9a9a9;
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+        }
+
+        .tr-h3 {
+            text-align: left;
+            background-color: #a9a9a9;
+            color: white;
+            padding: 0;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1.4em;
+        }
+
+        .tr-even {
+            background-color: #f0f0f0;
+        }
+
+        .tr-odd {
+            background-color: white;
+        }
+
+        .payment-button {
+            height: 40px;
+            background-color: #2020db;
+            border: 2px solid #1f1fff;
+            outline: none;
+            transition: .4s;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            width: 40%;
+            padding-left: 20px;
+        }
+
+        .payment-button:hover {
+            background-color: #1717c2;
+            border: 2px solid #1717c2;
+        }
+
+        #download-btn {
+            margin-right: 10px;
+        }
+
+        .icon {
+            position: absolute;
+            margin-top: 1px;
+            margin-right: 85px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand logo" href="#"
+                style='background-color: #121212; color:#AFEeee; font-weight:700;font-size:30px;'>FLIGHT</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <span class="header"
+                            style="background-color: #121212; color:#AFEeee; font-weight:700;font-size:30px;">E-Ticket</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <hr style="height: 1px; border: 0; background-color: grey;" noshade>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: 15px auto;">
+                    <h3 style="background-color: #121212;">Important information</h3>
+                    <ul style="padding-left: 50px;">
+                        <li>
+                            This is your E-Ticket Iternary. You must bring it to the
+                            airport for check-in, and it is recommended you to
+                            retain a copy for your records.
+                        </li>
+                        <li>
+                            Each passenger travelling needs a printed copy of this
+                            document for immigrations, customs, airport security
+                            checks and duty free purchases.
+                        </li>
+                        <li>
+                            Economy Class passengers should report to airline
+                            check-in desks 3 hours prior to departure of all
+                            flights. First and Business Class passengers should
+                            report to airline check-in desks not later than 1 hour
+                            prior to departure. Boarding for your flight begins at
+                            least 35 minutes before your scheduled departure time.
+                            Gates close 15 minutes prior to departure
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <h3 style="background-color: #121212;">RESERVATION INFORMATION</h3>
+                    <tbody>
+                        <tr class="tr-odd">
+                            <th>RESERVATION REFERENCE</th>
+                            <td>{{reservationData.reservation_id }}</td>
+                            <th>DATE & TIME</th>
+                            <td>{{current_datetime}}</td>
+                        </tr>
+                        <tr class="tr-even">
+                            <th>DEPARTURE DATE</th>
+                            <td>{{reservationData.departure_date}}</td>
+                            <th>RETURN DATE</th>
+                            <td>{{reservationData.return_date}}</td>
+                        </tr>
+                        <tr class="tr-odd">
+                            <th>EMAIL</th>
+                            <td>{{email}}</td>
+                            <th>USERNAME</th>
+                            <td>{{username}}</td>
+                        </tr>
+                        <tr class="tr-even">
+                            <th>STATUS</th>
+                            <td>CONFIRMED</td>
+                            <th></th>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <h3 style="background-color: #121212;">PASSENGER INFORMATION</h3>
+                    <tbody>
+                        <tr class="tr-odd">
+                            <th scope="row">S NO.</th>
+                            <th scope="row">PASSENGER NAME</th>
+                            <th scope="row">PASSENGER AGE</th>
+                            <th scope="row">PASSENGER GENDER</th>
+                        </tr>
+                        {% for name, age, gender in passenger_details %}
+                        <tr class="{% cycle 'tr-odd' 'tr-even' %}">
+                            <td style="width: 10%; padding-left: 20px;">{{ forloop.counter }}</td>
+                            <td style="width: 20%; padding-left: 20px;">{{ name|upper }}</td>
+                            <td style="width: 20%; padding-left: 20px;">{{ age|upper }}</td>
+                            <td style="width: 50%; padding-left: 20px;">{{ gender|upper }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <table class="table">
+                    <h3 style="background-color: #121212;">OUTBOUND FLIGHT INFORMATION</h3>
+                    <tbody>
+                        <tr class="tr-odd">
+                            <th scope="row">FLIGHT ID</th>
+                            <th scope="row">DEPARTURE DATE</th>
+                            <th scope="row">ARRIVAL DATE</th>
+                            <th scope="row">DEPARTURE TIME</th>
+                            <th scope="row">ARRIVAL TIME</th>
+                        </tr>
+                        <tr class="tr-even">
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.flight_id|upper}}</td>
+                            <td style="width: 22%; padding-left: 20px;">{{reservationData.return_date|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">none</td>
+                            <td style="width: 22%; padding-left: 20px;">{{outboundData.departure_time|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.arrival_time|upper}}</td>
+                        </tr>
+                        <tr class="tr-odd">
+                            <th scope="row">ORIGIN CODE</th>
+                            <th scope="row">DESTINATION CODE</th>
+                            <th scope="row">DURATION</th>
+                            <th scope="row">CLASS</th>
+                            <th scope="row">AIRLINE</th>
+                        </tr>
+                        <tr class="tr-even">
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.origin_code|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.destination_code|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.flight_duration|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.flight_class|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{outboundData.airline| upper}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table">
+                    <h3 style="background-color: #121212;">INBOUND FLIGHT INFORMATION</h3>
+                    <tbody>
+                        <tr class="tr-odd">
+                            <th scope="row">FLIGHT ID</th>
+                            <th scope="row">DEPARTURE DATE</th>
+                            <th scope="row">ARRIVAL DATE</th>
+                            <th scope="row">DEPARTURE TIME</th>
+                            <th scope="row">ARRIVAL TIME</th>
+                        </tr>
+                        <tr class="tr-even">
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.flight_id|upper}}</td>
+                            <td style="width: 22%; padding-left: 20px;">{{reservationData.return_date|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">none</td>
+                            <td style="width: 22%; padding-left: 20px;">{{inboundData.departure_time|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.arrival_time|upper}}</td>
+                        </tr>
+                        <tr class="tr-odd">
+                            <th scope="row">ORIGIN CODE</th>
+                            <th scope="row">DESTINATION CODE</th>
+                            <th scope="row">DURATION</th>
+                            <th scope="row">CLASS</th>
+                            <th scope="row">AIRLINE</th>
+                        </tr>
+                        <tr class="tr-even">
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.origin_code|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.destination_code|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.flight_duration|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.flight_class|upper}}</td>
+                            <td style="width: 29%; padding-left: 20px;">{{inboundData.airline| upper}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table">
+                    <h3 style="background-color: #121212;">OUTBOUND FARE DETAILS</h3>
+                    <tbody>
+                        {% if currencySelected == 'USD' %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>USD {{totalamtOutbound|upper}}</td>
+                        </tr>
+                        {% else %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>AED {{totalamtOutbound|upper}}</td>
+                        </tr>
+                        {% endif %}
+                        <tr class="tr-even">
+                            <th style="width: 35%;">CHARGES</th>
+                            <td style="width: 65%;">DHS 0</td>
+                        </tr>
+                        <tr class="tr-odd">
+                            <th style="width: 35%;">DISCOUNT</th>
+                            <td style="width: 65%;">DHS 0</td>
+                        </tr>
+                        {% if currencySelected == 'USD' %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>USD {{totalamtOutbound|upper}}</td>
+                        </tr>
+                        {% else %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>AED {{totalamtOutbound|upper}}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <table class="table">
+                    <h3 style="background-color: #121212;">INBOUND FARE DETAILS</h3>
+                    <tbody>
+                        {% if currencySelected == 'USD' %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>USD {{totalamtInbound|upper}}</td>
+                        </tr>
+                        {% else %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>AED {{totalamtInbound|upper}}</td>
+                        </tr>
+                        {% endif %}
+                        <tr class="tr-even">
+                            <th style="width: 35%;">CHARGES</th>
+                            <td style="width: 65%;">DHS 0</td>
+                        </tr>
+                        <tr class="tr-odd">
+                            <th style="width: 35%;">DISCOUNT</th>
+                            <td style="width: 65%;">DHS 0</td>
+                        </tr>
+                        {% if currencySelected == 'USD' %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>USD {{totalamtInbound|upper}}</td>
+                        </tr>
+                        {% else %}
+                        <tr class="tr-odd">
+                            <th scope="row">FARE</th>
+                        <td>AED {{totalamtInbound|upper}}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="{% url 'flightBooking:sendEmail' reservationData.reservation_id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="payment-button">
+                        <i class="fas fa-ticket-alt icon" style="color: white;"></i> E-Ticket
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="text-center" style="margin-top: 20px;">
+        <p>&#169; 2024 Flight Inc. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    var reservationId = "{{ reservationData.reservation_id }}";
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        downloadTicket()
+    })
+
+    function downloadTicket() {
+        const invoice = this.document.getElementById("ticket");
+        var opt = {
+            margin: 0,
+            filename: `OnewayTicket_${reservationId}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 1 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().from(ticket).set(opt).save();
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your flight is booked!",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    })
+    function checkViewportWidth() {
+        const tableClass = document.querySelectorAll('.table');
+        if (window.innerWidth < 768) {
+            for (let x = 0; x < tableClass.length; x++) {
+                tableClass[x].classList.add('table-responsive');
+            }
+        }
+        else {
+            for (let x = 0; x < tableClass.length; x++) {
+                tableClass[x].classList.remove('table-responsive');
+            }
+        }
+    }
+
+    window.addEventListener('resize', () => {
+        checkViewportWidth();
+    });
+
+</script>
+
+</body>
+
+</html>

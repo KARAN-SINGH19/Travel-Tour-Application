@@ -1,0 +1,205 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    .input-group input{
+        background-color: #121212 !important;
+        color: #AFEeee !important;
+    }
+    .input-group input::placeholder{
+        color: #AFEeee !important; 
+    }
+    @media screen and (max-width: 768px) {
+        .card-body{
+            text-align: center;
+        }
+        .book-hotel-btn {
+          margin-left: 0px !important;
+        }
+        .input-group{
+            white-space: nowrap;
+        }
+    }
+    .card {
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+        height: auto; /* Adjust height to auto */
+        background-color: #121212;
+        color:#AFEeee;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0 8px 8px 0;
+        margin: 35px 5px 15px 10px;
+    }
+
+    .card-body {
+        padding: 50px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 1px 1px 1px 20px;
+        color:#AFEeee;
+    }
+
+    .card-title {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 18px;
+        color:#AFEeee;
+        margin-bottom: 8px;
+    }
+
+    .filter {
+        margin-bottom: 50px;
+        width: 80%;
+        margin: 40px 0;
+        margin-left: 10%;
+        height:10vh;
+    }
+
+    h1 {
+        margin: 5px 0;
+    }
+
+    .box {
+        background-color: #121212;
+        border-radius: 15px;
+        outline: none;
+        padding: 20px;
+        margin: auto;
+        margin-top: 10px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .star-ratings .fa-star {
+        color: #ffd700;
+        /* gold color for filled stars */
+    }
+
+    .star-ratings .fa-star:not(.checked) {
+        color: #ccc;
+        /* lighter color for unfilled stars */
+    }
+
+    .book-hotel-btn {
+        width: 240px;
+        height: 50px;
+        min-height: 50px;
+        max-height: 50px;
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        border-radius: 50px;
+        outline: none;
+        transition: .4s;
+        color: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 30px;
+    }
+
+    .book-hotel-btn:hover {
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+
+    .buttonS{
+        height: 40px;
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        outline: none;
+        transition: .4s;
+        color: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex; /* Add display flex */
+        justify-content: center;
+        padding-top: 8px;
+        padding-left: 35px;
+    }
+    .buttonS:hover{
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+    .searchicon{
+        position: absolute;
+        top: 12px;
+        right: 68px;
+    }
+</style>
+
+
+<div class="container box">
+    <h1 class="text-center heading" style=" color: #AFEeee;">Resort Bookings</h1>
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'home:resortSearch' %}" method="get" class="filter">
+                {% csrf_token %}
+                <div class="d-flex align-items-center">
+                    <div class="input-group flex-grow-1">
+                        <input type="search" class="form-control search" id="exampleFormControlInput2"
+                            name="search" placeholder="Search by name / location / starting price">
+                        <button type="submit" class="btn btn-primary ms-2 buttonS">
+                            <i class="fas fa-search searchicon"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for resort, price in zipped_data %}
+    <div class="card mb-4" style="max-width: 900px;">
+        <div class="row g-0">
+            <div class="col-md-5">
+                <img class="img" src="/media/{{resort.resort_image}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h5 class="card-title">{{resort.resort_name}}</h5>
+                    <p class="card-text">Location : {{resort.resort_location}}</p>
+                    
+                    {% if currencySelected == 'USD' %}
+                    <p class="card-text">Starting Price : USD {{price}} / Night</p>
+                    {% else %}
+                    <p class="card-text">Starting Price : AED {{price}} / Night</p>
+                    {% endif %}
+
+                    <p class="card-text">Inclusive of all Taxes</p>
+                    <div class="star-ratings">
+                        {% for star in "12345" %}
+                        {% if forloop.counter <= resort.ratings %} <span class="fa fa-star checked"></span>
+                            {% else %}
+                            <span class="fa fa-star"></span>
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                    <a href="{% url 'resortBooking:bookResort' id=resort.resort_id name=resort.resort_name location=resort.resort_location image=resort.resort_image.url %}">
+                        <button type="submit" class="book-hotel-btn">
+                            <i class="fas fa-dollar-sign"></i> Show Prices</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

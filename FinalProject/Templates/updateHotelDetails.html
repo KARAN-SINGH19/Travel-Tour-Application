@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<div class="container  mt-4">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" action="{% url 'adminPanel:updateHotelDetails' hotelData.hotel_id %}">
+        {% csrf_token %}
+        <center>
+            <h2>Update Hotel Details</h2>
+        </center>
+        <hr>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Hotel
+                ID</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="hotelId"
+                value="{{hotelData.hotel_id}}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Hotel
+                Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="hotelName"
+                value="{{hotelData.hotel_name}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Hotel Location</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="hotelLocation"
+                value="{{hotelData.hotel_location}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Starting Price</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="startingPrice"
+                value="{{hotelData.starting_price}}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"> Ratings</label>
+            <input type="number" class="form-control" id="exampleInputPassword1" name="ratings"
+                value="{{hotelData.ratings}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Details</button>
+    </form>
+
+</div>
+{% endblock %}

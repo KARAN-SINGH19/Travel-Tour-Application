@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .submit {
+    width: 30%;
+    margin-top: 10px;
+    background-color: #2020db;
+    border: 2px solid #1f1fff;
+    outline: none;
+    transition: .4s;
+  }
+
+  .submit:hover {
+    background-color: #1717c2;
+    border: 2px solid #1717c2;
+  }
+</style>
+<div style="height: 100%; width:100%; padding: 10%; display:block;">
+  <div style="text-align: center; margin: auto;box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7); padding:50px;">
+    <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="white"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+      <path
+        d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+    </svg>
+    <br><br>
+    <h3 style="color:#AFEeee;">Sorry, No Flight for this Search</h3>
+    <p style="color:#AFEeee;">
+      We cannot find any flights for the cabin class of your search. Please
+      modify your search criteria and try again.
+    </p>
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary submit" id="submitBtn"><a href="{% url 'home:home' %}"
+          style="text-decoration: none; color: white;">Home</a></button>
+    </div>
+  </div>
+</div>
+{% endblock %}

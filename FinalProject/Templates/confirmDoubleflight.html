@@ -1,0 +1,697 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    @media (min-width:1024px) and (max-width:1366px) {
+       .submit{
+        width: 50% !important; 
+       }
+       footer{
+        margin-top: 200px;
+       }
+    }
+    @media (min-width:360px) and (max-width:740px) {
+        .submit{
+         width: 100% !important; 
+        }
+     }
+     @media (min-width:430px) and (max-width:932px) {
+        .submit{
+         width: 100% !important; 
+        }
+     }
+
+    @media (min-width: 768px) and (max-width:1024px) {
+        .submit{
+         width: 50% !important; 
+        }
+     }
+
+    @media (min-width:820px) and (max-width:1180px) {
+      .submit{
+        width: 50% !important;
+      }
+    }
+
+    @media (min-width: 360px) {
+        .passanger-depart .title {
+            margin-left: 10px;
+        }
+
+        .passanger-arrives .title {
+            margin-left: 10px;
+        }
+
+        .flight-data {
+            margin-left: -20px;
+        }
+
+        .flight-number .title {
+            margin-left: 10px;
+        }
+
+        .flightID {
+            text-align: center;
+        }
+
+        .detail {
+            text-align: center;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .to-city {
+            text-align: center;
+        }
+
+        .from-city {
+            text-align: center;
+        }
+
+        .form-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: #fff;
+            max-width: 1000px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        .flight-details-row {
+            width: 100%;
+            display: grid;
+            padding: 30px 50px;
+            grid-template-columns: 3fr 3fr 3fr 1fr;
+            margin-left: -40px !important;
+        }
+
+        .detail {
+            font-size: 16px !important;
+        }
+
+        .flight-card-content {
+            width: auto;
+            height: auto;
+            display: inline-block;
+
+            .flight-row {
+                width: 100%;
+                padding: 50px 50px;
+                display: grid;
+                grid-template-columns: 3fr 3fr 3fr !important;
+                margin-left: -24px !important;
+            }
+        }
+
+        footer {
+            padding-left: 0%;
+            margin-left: 0%;
+            width: fit-content;
+        }
+
+        .returnDate {
+            margin-left: 8px;
+        }
+
+        .flight-class {
+            margin-left: 20px;
+        }
+
+        .submit {
+            width: 100%;
+        }
+    }
+
+
+
+    @media (min-width: 430px) {
+
+        .flight-number .title {
+            margin-left: 10px !important;
+        }
+
+
+        .detail {
+            font-size: 18px !important;
+        }
+
+        .flightID {
+            text-align: center !important;
+        }
+
+        .detail {
+            text-align: center !important;
+        }
+
+        .title {
+            text-align: center !important;
+        }
+
+        .to-city {
+            text-align: center !important;
+        }
+
+        .from-city {
+            text-align: center !important;
+        }
+
+        .title {
+            white-space: nowrap;
+        }
+
+        .form-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: #fff;
+            max-width: 1000px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        .flight-details-row {
+            width: 100%;
+            display: grid;
+            padding: 30px 50px;
+            grid-template-columns: 3fr 3fr 3fr 1fr;
+            margin-left: -20px !important;
+        }
+
+        .flight-card-content {
+            width: auto;
+            height: auto;
+            display: inline-block;
+
+            .flight-row {
+                width: 100%;
+                padding: 50px 50px;
+                display: grid;
+                grid-template-columns: 3fr 3fr 3fr;
+                margin-left: -20px !important;
+            }
+        }
+
+        footer {
+            padding-left: 0%;
+            margin-left: 0%;
+            width: fit-content;
+        }
+
+        .returnDate {
+            margin-left: 10px !important;
+        }
+
+        .flight-class {
+            margin-left: 20px !important;
+        }
+    }
+
+
+
+    body {
+        padding-right: 0%;
+        margin-left: 0%;
+        overflow-x: hidden;
+    }
+
+    .form-control {
+        box-shadow: none;
+        border-color: #0275d8;
+        width: 100%;
+    }
+
+    .flight-card {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        margin: 50px auto;
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+
+        .flight-card-header {
+            height: 280px;
+            width: 100%;
+            background: linear-gradient(to bottom, #264b76 0%, #002c5f 100%);
+            padding: 30px 50px;
+            border-bottom: 7px solid #6DBE47;
+            position: relative;
+
+            .flight-logo {
+                height: 110px;
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+
+                img {
+                    width: 150px;
+                    border: 2px solid #fff;
+                    /* Add a border to the image */
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                    /* Add a subtle shadow */
+                    margin-top: -30px;
+                }
+            }
+
+            .flight-data {
+                height: auto;
+                border-top: 2px solid #3E5177;
+                padding-top: 1em;
+                display: grid;
+                grid-template-columns: 2fr 2fr 1fr 1fr;
+                text-align: left;
+
+                span {
+                    display: block;
+                    white-space: nowrap;
+                }
+
+                .title {
+                    color: #838EA8;
+                    font-size: 16px;
+                }
+
+                .detail {
+                    font-size: 18px;
+                    padding-top: 3px;
+                    color: white;
+                }
+
+            }
+        }
+
+        .flight-card-content {
+            width: auto;
+            height: auto;
+            display: inline-block;
+
+            .flight-row {
+                width: 100%;
+                padding: 50px 50px;
+                display: grid;
+                grid-template-columns: 3fr 3fr 3fr;
+                margin-left: 10px;
+
+                .plane {
+                    text-align: center;
+                    position: relative;
+
+                    img {
+                        width: 90px;
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .flight-from {
+                text-align: left;
+                float: left;
+                color: #AFEeee;
+            }
+
+            .flight-to {
+                text-align: right;
+                float: right;
+                color: #AFEeee;
+            }
+
+            .flight-from,
+            .flight-to {
+                span {
+                    display: block;
+                }
+
+                .from-code,
+                .to-code {
+                    font-size: 60px;
+                    color: #AFEeee;
+                    font-weight: 200;
+                }
+
+                .from-city,
+                .to-city {
+                    font-size: 18px;
+                    color: #AFEeee;
+                    font-weight: 400;
+                }
+            }
+
+            .flight-details-row {
+                width: 100%;
+                display: grid;
+                padding: 30px 50px;
+                grid-template-columns: 3fr 3fr 3fr 1fr;
+                margin-left: 10px;
+
+                span {
+                    display: block;
+                }
+
+                .title {
+                    color: #AFEeee;
+                    font-size: 16px;
+                    letter-spacing: 3px;
+                    width: auto;
+                }
+
+                .detail {
+                    margin-top: .2em;
+                    color: #AFEeee;
+                    font-size: 20px;
+                    width: auto;
+                }
+
+                .flight-operator {
+                    width: auto;
+                }
+
+                .flight-class {
+
+                    width: auto;
+                }
+
+                .flight-number {
+                    width: auto;
+                }
+            }
+        }
+    }
+
+    .form-card {
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+        overflow: hidden;
+        background-color: #fff;
+        max-width: 1000px;
+        width: 90%;
+        margin: 60px auto;
+    }
+
+
+
+    .form-card-header {
+        padding: 15px;
+        background: linear-gradient(to bottom, #264b76 0%, #002c5f 100%);
+        color: #AFEeee;
+        text-align: center;
+    }
+
+    .form-card-body {
+        padding: 20px;
+        background-color: #121212;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    input,
+    select {
+        box-sizing: border-box;
+        border: 1px solid white;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #AFEeee;
+        background-color: #121212;
+    }
+
+    .field-group {
+        display: inline-block;
+        margin-right: 161px;
+    }
+
+    .submit {
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        transition: .4s;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 35%;
+    }
+
+    .submit:hover {
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+
+
+    .input-field {
+        position: relative;
+        margin-bottom: 20px;
+        /* Add margin-bottom for spacing */
+    }
+
+    .input-field input {
+        width: calc(100% - 30px);
+        height: 50px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        outline: none;
+        transition: .4s;
+        padding-left: 30px;
+        font-size: 15px;
+    }
+
+    form input {
+        background-color: #121212 !important;
+        color: #AFEeee !important;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    form input::placeholder {
+        color: #AFEeee !important;
+    }
+
+    footer {
+        padding-right: 0%;
+        margin-right: 0%;
+    }
+</style>
+</head>
+
+<body>
+    <div class="row">
+        <!-- CARD TO DISPLAY THE OUTBOUND DATA -->
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="flight-card">
+                <div class="flight-card-header">
+                    <div class="flight-logo">
+                        <img src="{{image}}" alt="">
+                    </div>
+                    <br>
+                    <div class="flight-data">
+                        <div class="passanger-details">
+                            <span class="title">Departure Date</span>
+                            <span class="detail">{{departure_date}}</span>
+                        </div>
+                        <div class="passanger-details">
+                            <span class="title returnDate">Return Date</span>
+                            <span class="detail returnDate">{{return_date}}</span>
+                        </div>
+                        <div class="passanger-depart">
+                            <span class="title">Depart</span>
+                            <span class="detail">{{InboundDepartureTime}}</span>
+                        </div>
+                        <div class="passanger-arrives">
+                            <span class="title">Arrives</span>
+                            <span class="detail">{{InboundArrivalTime}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flight-card-content">
+                    <div class="flight-row">
+                        <div class="flight-from">
+                            <span class="from-code">{{OutboundOriginCode}}</span>
+                            <span class="from-city">{{OutboundDepartureCity}}</span>
+                        </div>
+                        <div class="plane">
+                            <img src="https://cdn.onlinewebfonts.com/svg/img_537856.svg"
+                                style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);"
+                                alt="">
+                        </div>
+                        <div class="flight-to">
+                            <span class="to-code">{{OutboundDestinationCode}}</span>
+                            <span class="to-city">{{OutboundArrivalCity}}</span>
+                        </div>
+                    </div>
+                    <div class="flight-details-row">
+                        <div class="flight-operator">
+                            <span class="title">OPERATOR</span>
+                            <span class="detail">{{OutboundAirline}}</span>
+                        </div>
+                        <div class="flight-number">
+                            <span class="title flightID">FLIGHT</span>
+                            <span class="detail">{{OutboundFlightid}}</span>
+                        </div>
+                        <div class="flight-class">
+                            <span class="title">CLASS</span>
+                            <span class="detail">{{flightClass}}</span>
+                        </div>
+                        <div class="flight-class">
+                            <span class="title" style="font-weight:1000;">FARE</span>
+                            <span class="detail" style="text-align: left;font-weight:1000;">{{OutboundFinalfare}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD TO DISPLAY THE INBOUND DATA -->
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="flight-card">
+                <div class="flight-card-header">
+                    <div class="flight-logo">
+                        <img src="{{image}}" alt="">
+                    </div>
+                    <br>
+                    <div class="flight-data">
+                        <div class="passanger-details">
+                            <span class="title">Departure Date</span>
+                            <span class="detail">{{return_date}}</span>
+                        </div>
+                        <div class="passanger-details">
+                            <span class="title returnDate">Return Date</span>
+                            <span class="detail returnDate">---</span>
+                        </div>
+                        <div class="passanger-depart">
+                            <span class="title">Depart</span>
+                            <span class="detail">{{InboundDepartureTime}}</span>
+                        </div>
+                        <div class="passanger-arrives">
+                            <span class="title">Arrives</span>
+                            <span class="detail">{{InboundArrivalTime}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flight-card-content">
+                    <div class="flight-row">
+                        <div class="flight-from">
+                            <span class="from-code">{{InboundOriginCode}}</span>
+                            <span class="from-city">{{InboundDepartureCity}}</span>
+                        </div>
+                        <div class="plane">
+                            <img src="https://cdn.onlinewebfonts.com/svg/img_537856.svg"
+                                style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);"
+                                alt="">
+                        </div>
+                        <div class="flight-to">
+                            <span class="to-code">{{InboundDestinationCode}}</span>
+                            <span class="to-city">{{InboundArrivalCity}}</span>
+                        </div>
+                    </div>
+                    <div class="flight-details-row">
+                        <div class="flight-operator">
+                            <span class="title">OPERATOR</span>
+                            <span class="detail">{{InboundAirline}}</span>
+                        </div>
+                        <div class="flight-number">
+                            <span class="title flightID">FLIGHT</span>
+                            <span class="detail">{{InboundFlightid}}</span>
+                        </div>
+                        <div class="flight-class">
+                            <span class="title">CLASS</span>
+                            <span class="detail">{{flightClass}}</span>
+                        </div>
+                        <div class="flight-class">
+                            <span class="title" style="font-weight:1000;">FARE</span>
+                            <span class="detail" style="text-align: left; font-weight:1000;">{{InboundFinalfare}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <div class="form-card-header" style="text-transform:uppercase;">
+            Passenger Details
+        </div>
+
+        <div class="form-card-body">
+            <form id="passengerForm"
+                action="{% url 'flightBooking:generateFlightreceipt2' passengers Totalamt InboundFinalfare OutboundFinalfare %}"
+                method="post">
+                {% csrf_token %}
+                {% for passenger_index in passengersCount %}
+                <div class="row passenger-fields">
+                    <div class="col-md-4 input-field" style="position: relative;">
+                        <i class="fas fa-user" style="position: absolute; top: 32%; margin-left: 5px; color:white;"></i>
+                        <input type="text" id="name{{ passenger_index }}" style="padding-left: 25px;"
+                            name="name{{ passenger_index }}" class="form-control" oninput="handleInput(this)"
+                            placeholder="Name" required>
+                    </div>
+
+                    <div class="col-md-4 input-field" style="position: relative;">
+                        <i class="fas fa-user" style="position: absolute; top: 32%; margin-left: 5px; color:white;"></i>
+                        <input type="number" id="age{{ passenger_index }}" style="padding-left: 25px;"
+                            name="age{{ passenger_index }}" class="form-control" oninput="handleInput(this)"
+                            placeholder="Age" required>
+
+                    </div>
+
+                    <div class="col-md-4 input-field" style="position: relative;">
+                        <i class="fas fa-user" style="position: absolute; top: 32%; margin-left: 5px; color:white;"></i>
+                        <input type="text" id="gender{{ passenger_index }}" style="padding-left: 25px;"
+                            name="gender{{ passenger_index }}" class="form-control" oninput="handleInput(this)"
+                            placeholder="Gender" required>
+
+                    </div>
+
+                </div>
+                <hr style="color: white;">
+                {% endfor %}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary submit" id="submitBtn"> <i
+                            class="fas fa-check-circle"></i> Submit Passenger Details</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        saveBtn = document.getElementById('submitBtn');
+
+        saveBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Please confirm the details before submission!",
+                icon: "warning",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: "Yes, confirm it!",
+                denyButtonText: `Cancel`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire("Passenger details submitted!", "", "success").then(() => {
+                        setTimeout(() => {
+                            saveBtn.closest('form').submit();
+                        }, 500);
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire("Passenger details not submitted", "", "info");
+                }
+            });
+        });
+
+        function handleInput(input) {
+            const label = input.nextElementSibling;
+            if (input.value.trim() !== '') {
+                label.classList.add('active');
+                label.style.top = '0';
+                label.style.left = '20px'
+            } else {
+                label.classList.remove('active');
+                label.style.top = '22px';
+            }
+        }
+    </script>
+    {% endblock %}

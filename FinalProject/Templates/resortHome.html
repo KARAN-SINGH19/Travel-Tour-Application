@@ -1,0 +1,135 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+  .jumbotron {
+    background-image: url('/media/uploads/images/pexels-thorsten-technoman-338504.jpg'); 
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 80px 0;
+    margin-bottom: 0;
+    height: 60vh;
+  }
+  .featured-hotels {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .hotel-card {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    background-color: #121212;
+    color: #AFEeee;
+  }
+
+  .hotel-card:hover {
+    transform: scale(1.05);
+  }
+
+  .hotel-card img {
+    padding: 5px;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+  }
+
+  .hotel-info {
+    padding: 15px;
+  }
+
+  .btn-explore {
+    margin-top: 50px;
+    width: 30%;
+  }
+
+  .btn-danger {
+    padding: 5px 15px;
+  }
+
+  .star-ratings .fa-star {
+    color: #ffd700;
+  }
+
+  .star-ratings .fa-star:not(.checked) {
+    color: #ccc;
+  }
+
+  .btn-explore{
+    width: 300px;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    background-color: #2020db;
+    border: 2px solid #1f1fff;
+    color: white;
+    font-weight: 550;
+    border-radius: 50px;
+    outline: none;
+    transition: .4s;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 30px;
+  }
+
+  .btn-explore:hover{
+    background-color: #1717c2;
+    border: 2px solid #1717c2;
+  }
+
+</style>
+<div class="jumbotron text-center">
+  <h1 class="display-4">Welcome to TripCanvas</h1>
+  <p class="lead">Discover, Book, and Manage Your Hotels and Resorts with
+    Ease</p>
+</div>
+
+<section class="container">
+  <h1 class="text-center mb-4"  style="color: #AFEeee;">Featured Resorts</h1>
+  <div class="row featured-hotels">
+    {% for resortData,price in zipped_data %}
+    <div class="col-md-4" style="margin-top: 30px;">
+      <div class="card hotel-card">
+        <img src="/media/{{resortData.resort_image}}" alt="Hotel Image"
+          class="card-img-top">
+        <div class="card-body hotel-info">
+          <h3 class="card-title">{{resortData.resort_name}}</h3>
+          <p class="card-text">Location: {{resortData.resort_location}}</p>
+          <p class="card-text">Starting Price:
+            {% if currencySelected == 'USD' %}
+              USD {{price}}/Night</p>
+              {% else %}
+              AED {{price}}/Night</p>
+              {% endif %}
+          <p class="card-text">Inclusive of all Taxes</p>
+          <div class="star-ratings">
+            {% for star in "12345" %}
+            {% if forloop.counter <= resortData.ratings %} <span
+              class="fa fa-star checked"></span>
+            {% else %}
+            <span class="fa fa-star"></span>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<div class="text-center">
+  <button class="btn-explore">
+    <a href="{% url 'home:resorts' %}" style="text-decoration:none; color:white;">
+      <i class="fas fa-search"></i> 
+      Explore All Resorts
+    </a>
+  </button>
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+        <div class="container">
+            <button class="btn btn-primary" id="addResortLink">Add Resort
+                Details</button>
+            <button class="btn btn-primary" id="addRoomLink">Add Room Details</button>
+        </div>
+    </div>
+    <form action method="post" class="col-6 mx-auto card p-3 shadow-lg" enctype="multipart/form-data"
+        id="resortDetails">
+        {% csrf_token %}
+        <center>
+            <h2>Add Resort Details</h2>
+        </center>
+        <hr />
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message}}</div>
+        {% endfor %}
+        {% endif %}
+        <div class="mb-3">
+            <label for="resortId" class="form-label">Resort ID</label>
+            <input type="text" class="form-control" placeholder="Enter Resort ID" name="resortId" />
+
+        </div>
+        <div class="mb-3">
+            <label for="resortName" class="form-label">Resort Name</label>
+            <input type="text" class="form-control" placeholder="Enter Resort Name" name="resortName" />
+        </div>
+        <div class="mb-3">
+            <label for="resortLocation" class="form-label">Resort
+                Location</label>
+            <input type="text" class="form-control" placeholder="Enter Resort Location" name="resortLocation" />
+        </div>
+        <div class="mb-3">
+            <label for="startingPrice" class="form-label">Starting Price</label>
+            <input type="number" class="form-control" placeholder="Enter Starting Price" name="startingPrice" />
+        </div>
+        <div class="mb-3">
+            <label for="ratings" class="form-label">Ratings</label>
+            <input type="number" class="form-control" placeholder="Enter Ratings" name="ratings" />
+        </div>
+        <div class="mb-3">
+            <label for="resortImage" class="form-label">Resort Image</label>
+            <input type="file" class="form-control" name="resortImage" />
+        </div>
+        <button type="submit" class="btn btn-primary" id="button1" name="submitBtn" value="addResort">Submit</button>
+    </form>
+
+    <form action method="post" class="col-6 mx-auto card p-3 shadow-lg" enctype="multipart/form-data" id="roomDetails"
+        style="display: none;">
+        {% csrf_token %}
+        <center>
+            <h2>Add Room Details</h2>
+        </center>
+        <hr />
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message}}</div>
+        {% endfor %}
+        {% endif %}
+        <div class="mb-3">
+            <label for="roomId" class="form-label">Room ID</label>
+            <input type="number" class="form-control" placeholder="Enter Room ID" name="roomId" />
+        </div>
+        <div class="mb-3">
+            <label for="roomName" class="form-label">Room Type</label>
+            <input type="text" class="form-control" placeholder="Enter Room Type" name="roomName" />
+        </div>
+        <div class="mb-3">
+            <label for="roomCapacity" class="form-label">Room Capacity</label>
+            <input type="text" class="form-control" placeholder="Enter Room Capacity" name="roomCapacity" />
+          </div>
+        <div class="mb-3">
+            <label for="roomPrice" class="form-label">Room Price</label>
+            <input type="number" class="form-control" placeholder="Enter Room Price" name="roomPrice" />
+        </div>
+        <div class="mb-3">
+            <label for="resortId" class="form-label">Resort ID</label>
+            <select class="form-select" id="resortId" name="resortId">
+                {% for x in resortData %}
+                <option value={{x.resort_id}}>{{x.resort_id}} | {{x.resort_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="button2" name="submitBtn" value="addRoom">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', display = () => {
+        const addResortbtn = document.getElementById('addResortLink')
+        const addRoombtn = document.getElementById('addRoomLink')
+        const addResortform = document.getElementById('resortDetails')
+        const addRoomform = document.getElementById('roomDetails')
+        const button1 = document.getElementById('button1')
+        const button2 = document.getElementById('button2')
+
+        addResortbtn.addEventListener('click', () => {
+            addResortform.style.display = 'block'
+            addRoomform.style.display = 'none'
+            button1.style.width = '100%'
+        })
+
+        addRoombtn.addEventListener('click', () => {
+            addResortform.style.display = 'none'
+            addRoomform.style.display = 'block'
+            button2.style.width = '100%'
+        })
+    })
+</script>
+{% endblock %}

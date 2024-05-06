@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <table class="table table-striped table-hover table-bordered caption-top shadow-lg">
+        <thead>
+            <tr>
+                <th scope="col">Resort ID</th>
+                <th scope="col">Resort Name</th>
+                <th scope="col">Resort Location</th>
+                <th scope="col">Starting Price</th>
+                <th scope="col">Ratings</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in resortData %}
+            <tr>
+                <td>{{ x.resort_id }}</td>
+                <td>{{ x.resort_name }}</td>
+                <td>{{ x.resort_location }}</td>
+                <td>AED {{ x.starting_price }}</td>
+                <td>{{ x.ratings }}</td>
+                <td>
+                    <form method='post' style="display: inline;" action="{% url 'adminPanel:updateResort' x.resort_id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </form>
+                    <form method='post' action="{% url 'adminPanel:deleteResort' x.resort_id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
