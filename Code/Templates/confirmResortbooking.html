@@ -1,0 +1,183 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    @media (min-width:1024px) and (max-width:1366px) {
+        footer {
+            margin-top: 339px !important;
+        }
+    }
+
+    @media (min-width:820px) and (max-width:1180px) {
+        footer {
+            margin-top: 143px !important;
+        }
+    }
+
+    form {
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    form input {
+        background-color: #121212 !important;
+        color: #AFEeee !important;
+    }
+
+    form input::placeholder {
+        color: #AFEeee !important;
+    }
+
+    .btn-primary {
+        height: 40px;
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        outline: none;
+        transition: .4s;
+        color: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex;
+        /* Add display flex */
+        justify-content: center;
+        padding-top: 8px;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+
+    .icon {
+        left: 0px;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        bottom: -3px;
+        color: white;
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            width: 100%;
+            max-width: 380px;
+            margin: auto;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="container mt-5">
+            <form action method="post" class="col-6 mx-auto card p-3" style="background-color: #121212; color:#AFEeee;">
+                {% csrf_token %}
+                <center>
+                    <h2>Confirm Reservation</h2>
+                </center>
+                <hr />
+                {% csrf_token %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">{{message }}</div>
+                {% endfor %}
+                {% endif %}
+                <div class="mb-3">
+                    <label for="type" class="form-label">Resort Name</label>
+                    <input type="text" class="form-control" name="resortName" value="{{name}}" readonly />
+                </div>
+                <div class="mb-3">
+                    <label for="hotelLocation" class="form-label">Resort
+                        Location</label>
+                    <input type="text" class="form-control" name="hotelLocation" value="{{location}}" readonly />
+                </div>
+                <div class="mb-3">
+                    <label for="roomType" class="form-label">Room Type</label>
+                    <input type="text" class="form-control" name="roomType" value="{{roomType}}" readonly />
+                </div>
+                <div class="mb-3 inp">
+                    <label for="bookingDuration" class="form-label">Booking
+                        Duration</label>
+                    <input type="number" class="form-control" id="duration" name="bookingDuration"
+                        placeholder="Enter Duration" />
+                </div>
+                {% if members %}
+                <div class="mb-3 inp">
+                    <label for="bookingDuration" class="form-label">Coupon
+                        Code</label>
+                    <input type="text" class="form-control" id="couponCode" name="couponCode"
+                        placeholder="Enter Coupon Code" />
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price per
+                        night</label>
+                    <input type="number" class="form-control" name="price" value="{{roomPrice}}" readonly />
+                </div>
+                <button type="submit" id="submitBtn" class="btn btn-primary">
+                    <i class="fas fa-check-circle icon"></i>
+                    Submit Details
+                </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const saveBtn = document.getElementById('submitBtn');
+    
+            saveBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                
+                const couponCode = document.getElementById('couponCode');
+    
+                // Check if the user is a member (couponCode field exists)
+                if (couponCode) {
+                    const couponValue = couponCode.value.trim();
+    
+                    if (couponValue === '') {
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "Do you want to continue without entering a coupon code?",
+                            icon: "warning",
+                            showDenyButton: true,
+                            confirmButtonText: "Yes",
+                            denyButtonText: "Cancel"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                submitForm();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "Please confirm the details before submission!",
+                            icon: "warning",
+                            showDenyButton: true,
+                            confirmButtonText: "Yes, confirm it!",
+                            denyButtonText: "Cancel"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                submitForm();
+                            }
+                        });
+                    }
+                } else {
+                    // If not a member, directly submit the form
+                    submitForm();
+                }
+            });
+    
+            function submitForm() {
+                Swal.fire("Details Submitted!", "", "success").then(() => {
+                    setTimeout(() => {
+                        saveBtn.closest('form').submit();
+                    }, 500);
+                });
+            }
+        });
+    </script>
+
+    {% endblock %}

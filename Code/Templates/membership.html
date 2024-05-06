@@ -1,0 +1,182 @@
+{% extends "base2.html" %}
+{% block content %}
+
+<style>
+
+    @media (min-width:1024px) and (max-width:1366px) {
+        footer {
+            margin-top: 601px !important;
+        }
+    }
+
+    @media (min-width:820px) and (max-width:1180px) {
+        footer {
+            margin-top: 370px !important;
+        }
+    }
+
+    .benefits-box {
+        background-color: #121212;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;        
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    p,h1,h2,li{
+        color: #AFEeee;
+    }
+
+    .benefits-icon {
+        font-size: 3rem;
+        color: #007bff;
+        display: flex;
+        justify-content: center; 
+        margin-bottom: 10px;
+    }
+
+    .benefits-icon2 {
+        font-size: 3rem;
+        color: gold;
+        display: flex;
+        justify-content: center; 
+        margin-bottom: 10px;
+    }
+
+    .benefits-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .benefits-list {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+
+    .benefits-list-item {
+        list-style-type: none;
+        margin-bottom: 5px;
+        display: flex; 
+        align-items: center;
+    }
+
+    .benefits-list-item i {
+        margin-right: 10px; 
+    }
+
+    .price {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-left: 10px; 
+    }
+
+    .payment-btn {
+        width: 250px;
+        height: 50px;
+        min-height: 50px;
+        max-height: 50px;
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        border-radius: 50px;
+        outline: none;
+        transition: .4s;
+        color: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 30px;
+    }
+
+    .payment-btn2 {
+        width: 250px;
+        height: 50px;
+        min-height: 50px;
+        max-height: 50px;
+        background-color: #2020db;
+        border: 2px solid #1f1fff;
+        border-radius: 50px;
+        outline: none;
+        transition: .4s;
+        color: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 30px;
+    }
+    
+    .payment-btn2:hover {
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+
+    .payment-btn:hover {
+        background-color: #1717c2;
+        border: 2px solid #1717c2;
+    }
+
+    .btn .fas {
+        margin-right: 5px; 
+    }
+
+  
+
+
+
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="benefits-box">
+                <h1 class="benefits-title text-center">Premium Membership</h1>
+                <i class="fas fa-star benefits-icon"></i>
+                <p style="text-align: justify;">Elevate your online journey with Premium Membership for just <strong style="font-size: 20px;">1000/Per Year</strong>. Gain exclusive access to advanced features, comprehensive support, personalized recommendations, and early access to new updates.</p>
+                <hr>
+                <h2 class="benefits-title text-center">Key Features</h2>
+                <ul class="benefits-list">
+                    <li class="benefits-list-item">
+                        <i class="fas fa-check"></i> Access to premium features
+                    </li>
+                    <li class="benefits-list-item">
+                        <i class="fas fa-check"></i> Exclusive content
+                    </li>
+                    <li class="benefits-list-item">
+                        <i class="fas fa-check"></i> Priority support
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <button class="payment-btn"><i class="fas fa-crown icon"></i> <a href="{% url 'home:payment' price=1000 name='Premium Membership' %}" style="text-decoration: none; color:white;">Join Premium</a> </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="benefits-box">
+                <h1 class="benefits-title text-center">Gold Membership</h1>
+                <i class="fas fa-medal benefits-icon2"></i>
+                <p style="text-align: justify;">Indulge in the epitome of luxury with Gold Membership for just <strong style="font-size: 20px;">1500/Per Year</strong>. Enjoy a suite of premium benefits including exclusive discounts, VIP event invitations, personalized concierge services and priority customer support.</p>
+                <hr>
+                <h2 class="benefits-title text-center">Key Features</h2>
+                <ul class="benefits-list">
+                    <li class="benefits-list-item">
+                        <i class="fas fa-check"></i> All premium benefits
+                    </li>
+                    <li class="benefits-list-item">
+                        <i class="fas fa-check"></i> Additional discounts
+                    </li>
+                    <li class="benefits-list-item">
+                        <i class="fas fa-check"></i> Special events access
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <button class="payment-btn2"><i class="fas fa-medal icon"></i> <a href="{% url 'home:payment' price=1500 name='Gold Membership' %}" style="text-decoration: none; color:white;">Join Gold</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

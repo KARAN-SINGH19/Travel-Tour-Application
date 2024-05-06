@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function showSidebar() {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'flex'
+    }
+    function hideSidebar() {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'none'
+    }
+  </script>
+  </body>
+
+</html>
+<script>
+  const lenis = new lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+</script>
+</head>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Tilt Neon', sans-serif;
+  }
+
+  th {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  tr {
+    text-align: center;
+  }
+
+  .navbar {
+    background-color: #f8f9fa;
+    height: 8vh;
+  }
+
+  .nav-link {
+    margin-top: 5px;
+  }
+
+  .nav-link2 {
+    margin-top: 21px;
+  }
+
+  .cta {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  .container {
+    padding: 40px 20px;
+  }
+
+  .bi-person-circle {
+    color: black;
+    position: relative;
+
+  }
+
+  .vertical-line {
+    border-left: 2px solid gainsboro;
+    height: 60px;
+    margin-left: 630px;
+  }
+
+  .user-icon {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: -12px;
+  }
+
+  .user-icon i {
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #003DB2;
+  }
+
+  .user-info p:first-child {
+    margin-bottom: 1px;
+  }
+
+  body {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  .jumbotron {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 80px 0;
+    margin-bottom: 0;
+  }
+
+  .navbar {
+    background-color: #343a40;
+    /* Darker background color for the navbar */
+  }
+
+
+  .navbar-nav .nav-link {
+    transition: color 0.3s ease;
+    /* Smooth transition for navbar links color */
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #007bff !important;
+    /* Navbar links text color on hover (Bootstrap primary color) */
+  }
+
+  .container {
+    margin-top: 10px;
+  }
+
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    transition: opacity 0.75s, visibility 0s 1s;
+    z-index: 2;
+  }
+
+  .loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+        violet,
+        indigo,
+        blue,
+        green,
+        yellow,
+        orange,
+        red,
+        violet);
+    animation: rotateGradient 1.5s linear infinite;
+    /* Rotating gradient circle */
+  }
+
+  @keyframes rotateGradient {
+    from {
+      transform: rotate(0turn);
+    }
+
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* Additional style enhancements */
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+  }
+
+  .card-title {
+    color: #007bff;
+  }
+
+  .card-text {
+    color: grey;
+  }
+
+  .list-group-item {
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .btn-primary,
+  .btn-danger {
+    border: none;
+    border-radius: 5px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+
+  .btn-danger:hover {
+    background-color: #bd2130;
+  }
+</style>
+
+<script>
+  window.addEventListener("beforeunload", () => {
+    // Show loader before navigating to a new page
+    const loader = document.querySelector(".loader");
+    loader.classList.remove("loader--hidden");
+  });
+
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Delay the removal of the loader after 10 seconds
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 1000); // 10 seconds
+  });
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Sample data, replace it with your actual data
+    const bookingTrendsData = {
+      labels: ["January", "February", "March", "April", "May", "June"],
+      datasets: [{
+        label: "Bookings",
+        backgroundColor: 'rgba(54, 162, 235, 0.6)', // Light blue
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 3,
+        hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)', // Slightly darker on hover
+        hoverBorderColor: 'rgba(54, 162, 235, 1)',
+        data: [65, 59, 80, 81, 56, 55],
+      }],
+    };
+
+    const bookingTrendsOptions = {
+      scales: {
+        x: {
+          beginAtZero: true,
+        },
+        y: {
+          beginAtZero: true,
+        },
+      },
+      responsive: true, // Make the chart responsive
+      maintainAspectRatio: false, // Allow the chart to be responsive
+    };
+
+    // Get the canvas element and initialize the chart
+    const bookingTrendsCanvas = document.getElementById('bookingTrendsChart');
+    const bookingTrendsChart = new Chart(bookingTrendsCanvas, {
+      type: 'bar',
+      data: bookingTrendsData,
+      options: bookingTrendsOptions,
+    });
+  });
+
+</script>
+
+<body>
+  <div class="loader"></div>
+  <div class=" col-12 col-sm-12 col-md-12 col-lg-10 col-xl-12">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid"style="padding-left: 5px;">
+        <a class="navbar-brand" style="margin-left: 0px; padding-left:0px;"> <!-- Add a href attribute to the navbar-brand -->
+          <img src="/media/uploads/images/tourism_2560196.png" style="width: 55px; height: 45px; border-radius: 10px; border: 0px solid #555; margin-bottom:5px;" alt="TripCanvas Logo">
+          TripCanvas
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href>Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Add Details
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'adminPanel:addHotel' %}">Hotel Details</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'adminPanel:addResort' %}">Resort
+                    Details</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'adminPanel:addFlight' %}">Flight
+                    Details</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                View Details
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'adminPanel:viewHotel' %}">Hotel
+                    Details</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'adminPanel:viewResort' %}">Resort
+                    Details</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'adminPanel:viewFlight' %}">Flight
+                    Details</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Edit Details
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'adminPanel:editHotel' %}">Hotel
+                    Details</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'adminPanel:editResort' %}">Resort
+                    Details</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'adminPanel:editFlight' %}">Flight
+                    Details</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <div class="vertical-line">
+                <div class="user-icon">
+                  <a href="{% url 'home:updateProfile' %}"><i class="fas fa-user nav-link2 animate__animated animate__wave" style="font-size: 2rem;"></i> </a>
+                  <div class="user-info">
+                    <p style="margin-top:12px;">{{userDetails.username}}</p>
+                    <p>{{userDetails.email}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <form class='form-inline' action="{% url 'adminPanel:logout_user' %}">
+                <button class='btn btn-danger' type='submit'
+                  style="margin-left: 20px; margin-top:7px;  padding: 5px 15px 5px 15px;">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Quick Stats Overview</h5>
+            <p class="card-text">
+              Total Hotels: {{ total_hotels }}
+              <br>
+              Total Flights: {{ total_flights }}
+              <br>
+              Total Users: {{ total_users }}
+            </p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Booking Trends</h5>
+            <div class="card mb-4">
+              <div class="card-body">
+                <canvas id="bookingTrendsChart" width="400" height="350"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Key Features</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="fas fa-cogs"></i> Manage and update hotel, resort, and flight
+                details
+                easily.</li>
+              <li class="list-group-item"><i class="fas fa-chart-line"></i> Track booking trends and user activities
+                with
+                interactive charts.</li>
+              <li class="list-group-item"><i class="fas fa-plus-circle"></i> Quickly add new hotels and flights through
+                the "Quick Actions" section.</li>
+              <li class="list-group-item"><i class="fas fa-edit"></i> View, edit, and update existing details
+                seamlessly.
+              </li>
+              <li class="list-group-item"><i class="fas fa-sign-out-alt"></i> Logout securely when done managing the
+                platform.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Quick Actions</h5>
+            <div class="row">
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:addHotel' %}" class="btn btn-primary btn-block">Add Hotels</a>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:addResort' %}" class="btn btn-primary btn-block">Add Resorts</a>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:addFlight' %}" class="btn btn-primary btn-block">Add Flights</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:viewHotel' %}" class="btn btn-primary btn-block">View Hotels</a>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:viewResort' %}" class="btn btn-primary btn-block">View Resorts</a>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:viewFlight' %}" class="btn btn-primary btn-block">View Flights</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:editHotel' %}" class="btn btn-primary btn-block">Edit Hotels</a>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:editResort' %}" class="btn btn-primary btn-block">Edit Resorts</a>
+              </div>
+              <div class="col-4 col-sm-4 col-md-4 mb-3">
+                <a href="{% url 'adminPanel:editFlight' %}" class="btn btn-primary btn-block">Edit Flights</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-auto py-3 text-center">
+    <div class="container">
+      <span class="text-muted">© 2024 TripCanvas. All rights reserved.</span>
+    </div>
+  </footer>
+</body>
+
+</html>
